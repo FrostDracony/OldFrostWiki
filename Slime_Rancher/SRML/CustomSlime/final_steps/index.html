@@ -13,6 +13,8 @@
         <meta name="author" content="FrostDracony">
       
       
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/final_steps/">
+      
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
     
@@ -333,118 +335,117 @@
 <h1 id="creating-a-constructor-function">Creating a constructor function</h1>
 <p>All that work for only one slime, but imagine if you were doing this for 4 slimes? You can't repeat and repeat the same code over the time, so it's time to use a function!
 I already told you a bit how I do it, so we only have to make a function from this mess:</p>
-<pre><code class="language-csharp">using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SRML.Utils;
-using UnityEngine;
-
-namespace Custom_Creator
-{
-    class Custom_Creator
-    {
-
-        public static (SlimeDefinition, GameObject) CreateSlime(Identifiable.Id SlimeId, String SlimeName)
-        {
-            SlimeDefinition pinkSlimeDefinition = SRSingleton&lt;GameContext&gt;.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.PINK_SLIME);
-            SlimeDefinition slimeDefinition = (SlimeDefinition)PrefabUtils.DeepCopyObject(pinkSlimeDefinition);
-            slimeDefinition.AppearancesDefault = new SlimeAppearance[1];
-            slimeDefinition.Diet.Produces = new Identifiable.Id[1]
-            {
-                Identifiable.Id.GOLD_PLORT
-            };
-
-            slimeDefinition.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[1]
-            {
-                SlimeEat.FoodGroup.VEGGIES
-            };
-
-            slimeDefinition.Diet.AdditionalFoods = new Identifiable.Id[0];
-
-            slimeDefinition.Diet.Favorites = new Identifiable.Id[1]
-            {
-                Identifiable.Id.CARROT_VEGGIE
-            };
-
-            slimeDefinition.Diet.EatMap?.Clear();
-            slimeDefinition.CanLargofy = false;
-            slimeDefinition.FavoriteToys = new Identifiable.Id[0];
-            slimeDefinition.Name = SlimeName;
-            slimeDefinition.IdentifiableId = SlimeId;
-
-            GameObject slimeObject = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.PINK_SLIME));
-            slimeObject.name = &quot;slimeSlime&quot;;
-            slimeObject.GetComponent&lt;PlayWithToys&gt;().slimeDefinition = slimeDefinition;
-            slimeObject.GetComponent&lt;SlimeAppearanceApplicator&gt;().SlimeDefinition = slimeDefinition;
-            slimeObject.GetComponent&lt;SlimeEat&gt;().slimeDefinition = slimeDefinition;
-            slimeObject.GetComponent&lt;Identifiable&gt;().id = SlimeId;
-            UnityEngine.Object.Destroy(slimeObject.GetComponent&lt;PinkSlimeFoodTypeTracker&gt;());
-
-            SlimeAppearance slimeAppearance = (SlimeAppearance)PrefabUtils.DeepCopyObject(pinkSlimeDefinition.AppearancesDefault[0]);
-            slimeDefinition.AppearancesDefault[0] = slimeAppearance;
-            SlimeAppearanceStructure[] structures = slimeAppearance.Structures;
-            foreach (SlimeAppearanceStructure slimeAppearanceStructure in structures)
-            {
-                Material[] defaultMaterials = slimeAppearanceStructure.DefaultMaterials;
-                if (defaultMaterials != null &amp;&amp; defaultMaterials.Length != 0)
-                {
-                    Material material = UnityEngine.Object.Instantiate(SRSingleton&lt;GameContext&gt;.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.PINK_SLIME).AppearancesDefault[0].Structures[0].DefaultMaterials[0]);
-                    material.SetColor(&quot;_TopColor&quot;, new Color32(190, 28, 255, 255));
-                    material.SetColor(&quot;_MiddleColor&quot;, new Color32(159, 28, 255, 255));
-                    material.SetColor(&quot;_BottomColor&quot;, new Color32(120, 28, 255, 255));
-                    material.SetColor(&quot;_SpecColor&quot;, new Color32(205, 28, 255, 255));
-                    material.SetFloat(&quot;_Shininess&quot;, 1f);
-                    material.SetFloat(&quot;_Gloss&quot;, 1f);
-                    slimeAppearanceStructure.DefaultMaterials[0] = material;
-                }
-            }
-            SlimeExpressionFace[] expressionFaces = slimeAppearance.Face.ExpressionFaces;
-            for (int k = 0; k &lt; expressionFaces.Length; k++)
-            {
-                SlimeExpressionFace slimeExpressionFace = expressionFaces[k];
-                if ((bool)slimeExpressionFace.Mouth)
-                {
-                    slimeExpressionFace.Mouth.SetColor(&quot;_MouthBot&quot;, new Color32(205, 190, 255, 255));
-                    slimeExpressionFace.Mouth.SetColor(&quot;_MouthMid&quot;, new Color32(182, 170, 226, 255));
-                    slimeExpressionFace.Mouth.SetColor(&quot;_MouthTop&quot;, new Color32(182, 170, 205, 255));
-                }
-                if ((bool)slimeExpressionFace.Eyes)
-                {
-                    slimeExpressionFace.Eyes.SetColor(&quot;_EyeRed&quot;, new Color32(205, 190, 255, 255));
-                    slimeExpressionFace.Eyes.SetColor(&quot;_EyeGreen&quot;, new Color32(182, 170, 226, 255));
-                    slimeExpressionFace.Eyes.SetColor(&quot;_EyeBlue&quot;, new Color32(182, 170, 205, 255));
-                }
-            }
-            slimeAppearance.Face.OnEnable();
-            slimeAppearance.ColorPalette = new SlimeAppearance.Palette
-            {
-                Top = new Color32(159, 28, 255, 255),
-                Middle = new Color32(120, 28, 255, 255),
-                Bottom = new Color32(190, 28, 255, 255)
-            };
-            slimeObject.GetComponent&lt;SlimeAppearanceApplicator&gt;().Appearance = slimeAppearance;
-
-            return (slimeDefinition, slimeObject);
-        }
-    }
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">using</span> <span class="nn">SRML.Utils</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="k">namespace</span> <span class="nn">Custom_Creator</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">class</span> <span class="nc">Custom_Creator</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>        <span class="k">public</span> <span class="nf">static</span> <span class="p">(</span><span class="n">SlimeDefinition</span><span class="p">,</span> <span class="n">GameObject</span><span class="p">)</span> <span class="n">CreateSlime</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span> <span class="n">SlimeId</span><span class="p">,</span> <span class="n">String</span> <span class="n">SlimeName</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="p">{</span>
+<span class="linenos" data-linenos="17 "></span>            <span class="n">SlimeDefinition</span> <span class="n">pinkSlimeDefinition</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">SlimeDefinitions</span><span class="p">.</span><span class="n">GetSlimeByIdentifiableId</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PINK_SLIME</span><span class="p">);</span>
+<span class="linenos" data-linenos="18 "></span>            <span class="n">SlimeDefinition</span> <span class="n">slimeDefinition</span> <span class="p">=</span> <span class="p">(</span><span class="n">SlimeDefinition</span><span class="p">)</span><span class="n">PrefabUtils</span><span class="p">.</span><span class="n">DeepCopyObject</span><span class="p">(</span><span class="n">pinkSlimeDefinition</span><span class="p">);</span>
+<span class="linenos" data-linenos="19 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">AppearancesDefault</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeAppearance</span><span class="p">[</span><span class="m">1</span><span class="p">];</span>
+<span class="linenos" data-linenos="20 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Produces</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="21 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="22 "></span>                <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GOLD_PLORT</span>
+<span class="linenos" data-linenos="23 "></span>            <span class="p">};</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">MajorFoodGroups</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="26 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="27 "></span>                <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">.</span><span class="n">VEGGIES</span>
+<span class="linenos" data-linenos="28 "></span>            <span class="p">};</span>
+<span class="linenos" data-linenos="29 "></span>
+<span class="linenos" data-linenos="30 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">AdditionalFoods</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+<span class="linenos" data-linenos="31 "></span>
+<span class="linenos" data-linenos="32 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Favorites</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="33 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="34 "></span>                <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_VEGGIE</span>
+<span class="linenos" data-linenos="35 "></span>            <span class="p">};</span>
+<span class="linenos" data-linenos="36 "></span>
+<span class="linenos" data-linenos="37 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span><span class="p">?.</span><span class="n">Clear</span><span class="p">();</span>
+<span class="linenos" data-linenos="38 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">CanLargofy</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="39 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">FavoriteToys</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+<span class="linenos" data-linenos="40 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="n">SlimeName</span><span class="p">;</span>
+<span class="linenos" data-linenos="41 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">IdentifiableId</span> <span class="p">=</span> <span class="n">SlimeId</span><span class="p">;</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span>            <span class="n">GameObject</span> <span class="n">slimeObject</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PINK_SLIME</span><span class="p">));</span>
+<span class="linenos" data-linenos="44 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;slimeSlime&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="45 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayWithToys</span><span class="p">&gt;().</span><span class="n">slimeDefinition</span> <span class="p">=</span> <span class="n">slimeDefinition</span><span class="p">;</span>
+<span class="linenos" data-linenos="46 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SlimeAppearanceApplicator</span><span class="p">&gt;().</span><span class="n">SlimeDefinition</span> <span class="p">=</span> <span class="n">slimeDefinition</span><span class="p">;</span>
+<span class="linenos" data-linenos="47 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SlimeEat</span><span class="p">&gt;().</span><span class="n">slimeDefinition</span> <span class="p">=</span> <span class="n">slimeDefinition</span><span class="p">;</span>
+<span class="linenos" data-linenos="48 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Identifiable</span><span class="p">&gt;().</span><span class="n">id</span> <span class="p">=</span> <span class="n">SlimeId</span><span class="p">;</span>
+<span class="linenos" data-linenos="49 "></span>            <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Object</span><span class="p">.</span><span class="n">Destroy</span><span class="p">(</span><span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PinkSlimeFoodTypeTracker</span><span class="p">&gt;());</span>
+<span class="linenos" data-linenos="50 "></span>
+<span class="linenos" data-linenos="51 "></span>            <span class="n">SlimeAppearance</span> <span class="n">slimeAppearance</span> <span class="p">=</span> <span class="p">(</span><span class="n">SlimeAppearance</span><span class="p">)</span><span class="n">PrefabUtils</span><span class="p">.</span><span class="n">DeepCopyObject</span><span class="p">(</span><span class="n">pinkSlimeDefinition</span><span class="p">.</span><span class="n">AppearancesDefault</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+<span class="linenos" data-linenos="52 "></span>            <span class="n">slimeDefinition</span><span class="p">.</span><span class="n">AppearancesDefault</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="n">slimeAppearance</span><span class="p">;</span>
+<span class="linenos" data-linenos="53 "></span>            <span class="n">SlimeAppearanceStructure</span><span class="p">[]</span> <span class="n">structures</span> <span class="p">=</span> <span class="n">slimeAppearance</span><span class="p">.</span><span class="n">Structures</span><span class="p">;</span>
+<span class="linenos" data-linenos="54 "></span>            <span class="k">foreach</span> <span class="p">(</span><span class="n">SlimeAppearanceStructure</span> <span class="n">slimeAppearanceStructure</span> <span class="k">in</span> <span class="n">structures</span><span class="p">)</span>
+<span class="linenos" data-linenos="55 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="56 "></span>                <span class="n">Material</span><span class="p">[]</span> <span class="n">defaultMaterials</span> <span class="p">=</span> <span class="n">slimeAppearanceStructure</span><span class="p">.</span><span class="n">DefaultMaterials</span><span class="p">;</span>
+<span class="linenos" data-linenos="57 "></span>                <span class="k">if</span> <span class="p">(</span><span class="n">defaultMaterials</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">defaultMaterials</span><span class="p">.</span><span class="n">Length</span> <span class="p">!=</span> <span class="m">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="58 "></span>                <span class="p">{</span>
+<span class="linenos" data-linenos="59 "></span>                    <span class="n">Material</span> <span class="n">material</span> <span class="p">=</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Object</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">SlimeDefinitions</span><span class="p">.</span><span class="n">GetSlimeByIdentifiableId</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PINK_SLIME</span><span class="p">).</span><span class="n">AppearancesDefault</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Structures</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">DefaultMaterials</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+<span class="linenos" data-linenos="60 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_TopColor&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">190</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="61 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_MiddleColor&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">159</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="62 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_BottomColor&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">120</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="63 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_SpecColor&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">205</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="64 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetFloat</span><span class="p">(</span><span class="s">&quot;_Shininess&quot;</span><span class="p">,</span> <span class="m">1f</span><span class="p">);</span>
+<span class="linenos" data-linenos="65 "></span>                    <span class="n">material</span><span class="p">.</span><span class="n">SetFloat</span><span class="p">(</span><span class="s">&quot;_Gloss&quot;</span><span class="p">,</span> <span class="m">1f</span><span class="p">);</span>
+<span class="linenos" data-linenos="66 "></span>                    <span class="n">slimeAppearanceStructure</span><span class="p">.</span><span class="n">DefaultMaterials</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="n">material</span><span class="p">;</span>
+<span class="linenos" data-linenos="67 "></span>                <span class="p">}</span>
+<span class="linenos" data-linenos="68 "></span>            <span class="p">}</span>
+<span class="linenos" data-linenos="69 "></span>            <span class="n">SlimeExpressionFace</span><span class="p">[]</span> <span class="n">expressionFaces</span> <span class="p">=</span> <span class="n">slimeAppearance</span><span class="p">.</span><span class="n">Face</span><span class="p">.</span><span class="n">ExpressionFaces</span><span class="p">;</span>
+<span class="linenos" data-linenos="70 "></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">&lt;</span> <span class="n">expressionFaces</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">k</span><span class="p">++)</span>
+<span class="linenos" data-linenos="71 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="72 "></span>                <span class="n">SlimeExpressionFace</span> <span class="n">slimeExpressionFace</span> <span class="p">=</span> <span class="n">expressionFaces</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="linenos" data-linenos="73 "></span>                <span class="k">if</span> <span class="p">((</span><span class="kt">bool</span><span class="p">)</span><span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Mouth</span><span class="p">)</span>
+<span class="linenos" data-linenos="74 "></span>                <span class="p">{</span>
+<span class="linenos" data-linenos="75 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Mouth</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_MouthBot&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">205</span><span class="p">,</span> <span class="m">190</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="76 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Mouth</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_MouthMid&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">182</span><span class="p">,</span> <span class="m">170</span><span class="p">,</span> <span class="m">226</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="77 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Mouth</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_MouthTop&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">182</span><span class="p">,</span> <span class="m">170</span><span class="p">,</span> <span class="m">205</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="78 "></span>                <span class="p">}</span>
+<span class="linenos" data-linenos="79 "></span>                <span class="k">if</span> <span class="p">((</span><span class="kt">bool</span><span class="p">)</span><span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Eyes</span><span class="p">)</span>
+<span class="linenos" data-linenos="80 "></span>                <span class="p">{</span>
+<span class="linenos" data-linenos="81 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Eyes</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_EyeRed&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">205</span><span class="p">,</span> <span class="m">190</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="82 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Eyes</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_EyeGreen&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">182</span><span class="p">,</span> <span class="m">170</span><span class="p">,</span> <span class="m">226</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="83 "></span>                    <span class="n">slimeExpressionFace</span><span class="p">.</span><span class="n">Eyes</span><span class="p">.</span><span class="n">SetColor</span><span class="p">(</span><span class="s">&quot;_EyeBlue&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">182</span><span class="p">,</span> <span class="m">170</span><span class="p">,</span> <span class="m">205</span><span class="p">,</span> <span class="m">255</span><span class="p">));</span>
+<span class="linenos" data-linenos="84 "></span>                <span class="p">}</span>
+<span class="linenos" data-linenos="85 "></span>            <span class="p">}</span>
+<span class="linenos" data-linenos="86 "></span>            <span class="n">slimeAppearance</span><span class="p">.</span><span class="n">Face</span><span class="p">.</span><span class="n">OnEnable</span><span class="p">();</span>
+<span class="linenos" data-linenos="87 "></span>            <span class="n">slimeAppearance</span><span class="p">.</span><span class="n">ColorPalette</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeAppearance</span><span class="p">.</span><span class="n">Palette</span>
+<span class="linenos" data-linenos="88 "></span>            <span class="p">{</span>
+<span class="linenos" data-linenos="89 "></span>                <span class="n">Top</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">159</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">),</span>
+<span class="linenos" data-linenos="90 "></span>                <span class="n">Middle</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">120</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">),</span>
+<span class="linenos" data-linenos="91 "></span>                <span class="n">Bottom</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">190</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">)</span>
+<span class="linenos" data-linenos="92 "></span>            <span class="p">};</span>
+<span class="linenos" data-linenos="93 "></span>            <span class="n">slimeObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SlimeAppearanceApplicator</span><span class="p">&gt;().</span><span class="n">Appearance</span> <span class="p">=</span> <span class="n">slimeAppearance</span><span class="p">;</span>
+<span class="linenos" data-linenos="94 "></span>
+<span class="linenos" data-linenos="95 "></span>            <span class="k">return</span> <span class="p">(</span><span class="n">slimeDefinition</span><span class="p">,</span> <span class="n">slimeObject</span><span class="p">);</span>
+<span class="linenos" data-linenos="96 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="97 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="98 "></span><span class="p">}</span>
+</code></pre></div>
 <h1 id="register-the-slime">Register the slime</h1>
-<p>Now we are able to create our own slimes, but they don't exist in the game. This is because we don't registered them. Promise, this will not take too long, add this in your main <code>Load</code> or <code>PostLoad</code> function:</p>
-<pre><code class="language-csharp">(SlimeDefinition, GameObject) SlimeTuple = Custom_Creator.CreateSlime(ModdedIds.Ids.SLIME_SLIME, &quot;Slime Slime&quot;); //Insert your own Id in the first argumeter
-
-//Getting the SlimeDefinition and GameObject separated
-SlimeDefinition Slime_Slime_Definition = SlimeTuple.Item1;
-GameObject Slime_Slime_Object = SlimeTuple.Item2;
-
-//And well, registering it!
-LookupRegistry.RegisterIdentifiablePrefab(Slime_Slime_Object);
-SlimeRegistry.RegisterSlimeDefinition(Slime_Slime_Definition);
-</code></pre>
+<p>Now we are able to create our own slimes, but they don't exist in the game. This is because we don't registered them. Promise, this will not take too long, add this in your main <code>Load</code> or <code>PostLoad</code> function:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">(</span><span class="n">SlimeDefinition</span><span class="p">,</span> <span class="n">GameObject</span><span class="p">)</span> <span class="n">SlimeTuple</span> <span class="p">=</span> <span class="n">Custom_Creator</span><span class="p">.</span><span class="n">CreateSlime</span><span class="p">(</span><span class="n">ModdedIds</span><span class="p">.</span><span class="n">Ids</span><span class="p">.</span><span class="n">SLIME_SLIME</span><span class="p">,</span> <span class="s">&quot;Slime Slime&quot;</span><span class="p">);</span> <span class="c1">//Insert your own Id in the first argumeter</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="c1">//Getting the SlimeDefinition and GameObject separated</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">SlimeDefinition</span> <span class="n">Slime_Slime_Definition</span> <span class="p">=</span> <span class="n">SlimeTuple</span><span class="p">.</span><span class="n">Item1</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">GameObject</span> <span class="n">Slime_Slime_Object</span> <span class="p">=</span> <span class="n">SlimeTuple</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span>
+<span class="linenos" data-linenos="7 "></span><span class="c1">//And well, registering it!</span>
+<span class="linenos" data-linenos="8 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterIdentifiablePrefab</span><span class="p">(</span><span class="n">Slime_Slime_Object</span><span class="p">);</span>
+<span class="linenos" data-linenos="9 "></span><span class="n">SlimeRegistry</span><span class="p">.</span><span class="n">RegisterSlimeDefinition</span><span class="p">(</span><span class="n">Slime_Slime_Definition</span><span class="p">);</span>
+</code></pre></div></p>
 <h1 id="conclusion">Conclusion</h1>
 <p>This is a really long tutorial, one of the longest. Now have fun by testing your slime! To spawn it, you use the command bar (crtl + tab). The next tutorial will talking about creating custom food. Time to celebrate!</p>
 <h1 id="return-to-the-main-place"><a href="/Slime_Rancher/SRML/SRML/">Return to the main place</a></h1>
@@ -456,7 +457,7 @@ SlimeRegistry.RegisterSlimeDefinition(Slime_Slime_Definition);
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="None",this.page.identifier="None"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//<shortname>.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/final_steps/",this.page.identifier="Slime_Rancher/SRML/CustomSlime/final_steps/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-iom.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>

@@ -13,6 +13,8 @@
         <meta name="author" content="FrostDracony">
       
       
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/modifying_crates/">
+      
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
     
@@ -344,19 +346,19 @@
 <p>The creator <a href="https://github.com/veesusmikelheir/SRML/wiki/Concepts#pediadirector">explained it</a> on the github of SRML.</p>
 <h1 id="how-to-start">How to start</h1>
 <p>We will insert the next code snippet in the Load or PostLoad function in our main class, you can choice where to put.</p>
-<pre><code class="language-csharp">AmmoRegistry.RegisterAmmoPrefab(PlayerState.AmmoMode.DEFAULT, SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.CRATE_PARTY_01));
-Sprite icon = SRSingleton&lt;SceneContext&gt;.Instance.PediaDirector.entries.First((PediaDirector.IdEntry x) =&gt; x.id == PediaDirector.Id.ORNAMENTS).icon;
-LookupRegistry.RegisterVacEntry(Identifiable.Id.CRATE_PARTY_01, new Color32(138, 87, 40, 255), icon);
-SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.CRATE_PARTY_01).GetComponent&lt;Vacuumable&gt;().size = Vacuumable.Size.NORMAL;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">AmmoRegistry</span><span class="p">.</span><span class="n">RegisterAmmoPrefab</span><span class="p">(</span><span class="n">PlayerState</span><span class="p">.</span><span class="n">AmmoMode</span><span class="p">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">));</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Sprite</span> <span class="n">icon</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">SceneContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">First</span><span class="p">((</span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">IdEntry</span> <span class="n">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">id</span> <span class="p">==</span> <span class="n">PediaDirector</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ORNAMENTS</span><span class="p">).</span><span class="n">icon</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterVacEntry</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">138</span><span class="p">,</span> <span class="m">87</span><span class="p">,</span> <span class="m">40</span><span class="p">,</span> <span class="m">255</span><span class="p">),</span> <span class="n">icon</span><span class="p">);</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">).</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Vacuumable</span><span class="p">&gt;().</span><span class="n">size</span> <span class="p">=</span> <span class="n">Vacuumable</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="first-line">First Line</h2>
-<p>Now, I will explain every line and what it does:</p>
-<pre><code class="language-csharp">AmmoRegistry.RegisterAmmoPrefab(PlayerState.AmmoMode.DEFAULT, SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.CRATE_PARTY_01));
-</code></pre>
-<p>Now, lets start with the method</p>
-<pre><code class="language-csharp">AmmoRegistry.RegisterAmmoPrefab
-</code></pre>
-<p>We are making the crate vaccumable. This method accept 2 parameters:</p>
+<p>Now, I will explain every line and what it does:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">AmmoRegistry</span><span class="p">.</span><span class="n">RegisterAmmoPrefab</span><span class="p">(</span><span class="n">PlayerState</span><span class="p">.</span><span class="n">AmmoMode</span><span class="p">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">));</span>
+</code></pre></div></p>
+<p>Now, lets start with the method
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">AmmoRegistry</span><span class="p">.</span><span class="n">RegisterAmmoPrefab</span>
+</code></pre></div>
+We are making the crate vaccumable. This method accept 2 parameters:</p>
 <ul>
 <li>An AmmoMode Enum</li>
 <li>The target GameObject</li>
@@ -368,31 +370,31 @@ SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id
 </ul>
 <p>For this tutorial we want the DEFAULT (Normal) Enum.</p>
 <p>Then, we need a GameObject, it's mean just a object of the game. We want to get the crate party for this example.</p>
-<pre><code class="language-csharp">SRSingleton&lt;GameContext&gt;.Instance.LookupDirector
-</code></pre>
-<p>We are getting the GameContext(<code>SRSingleton&lt;GameContext&gt;.Instance</code>) to then get the LookupDirector. The LookupDirector contains a <code>GetPrefab</code> method, wich requires a Identifiable.Id and returns the GameObject of it.</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span>
+</code></pre></div>
+We are getting the GameContext(<code>SRSingleton&lt;GameContext&gt;.Instance</code>) to then get the LookupDirector. The LookupDirector contains a <code>GetPrefab</code> method, wich requires a Identifiable.Id and returns the GameObject of it.</p>
 <p>TL;DR (the second parameter)
 We are getting the GameObject of our Crate.</p>
 <h2 id="second-line">Second Line</h2>
-<pre><code class="language-csharp">Sprite icon = SRSingleton&lt;SceneContext&gt;.Instance.PediaDirector.entries.First((PediaDirector.IdEntry x) =&gt; x.id == PediaDirector.Id.ORNAMENTS).icon;
-</code></pre>
-<p>All collectable objects of the game have their own picture, so why not our? And that's what we are doing!</p>
-<pre><code class="language-csharp">Sprite icon = SRSingleton&lt;SceneContext&gt;.Instance.PediaDirector
-</code></pre>
-<p>Like with the LookupDirector, we are getting the PediaDirector from the SceneContext.</p>
-<pre><code class="language-csharp">PediaDirector.entries
-</code></pre>
-<p>All the icons/images of the game</p>
-<pre><code class="language-csharp">entries.First((PediaDirector.IdEntry x) =&gt; x.id == PediaDirector.Id.ORNAMENTS).icon
-</code></pre>
-<p>We are targeting the Ornaments (These christmas balls), getting some sort of object and getting the icon of it. You can change the <code>PediaDirector.Id</code> to the object that you want to have the image</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">Sprite</span> <span class="n">icon</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">SceneContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">First</span><span class="p">((</span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">IdEntry</span> <span class="n">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">id</span> <span class="p">==</span> <span class="n">PediaDirector</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ORNAMENTS</span><span class="p">).</span><span class="n">icon</span><span class="p">;</span>
+</code></pre></div>
+All collectable objects of the game have their own picture, so why not our? And that's what we are doing!
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">Sprite</span> <span class="n">icon</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">SceneContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">PediaDirector</span>
+</code></pre></div>
+Like with the LookupDirector, we are getting the PediaDirector from the SceneContext.
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">entries</span>
+</code></pre></div>
+All the icons/images of the game
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">entries</span><span class="p">.</span><span class="n">First</span><span class="p">((</span><span class="n">PediaDirector</span><span class="p">.</span><span class="n">IdEntry</span> <span class="n">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">id</span> <span class="p">==</span> <span class="n">PediaDirector</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ORNAMENTS</span><span class="p">).</span><span class="n">icon</span>
+</code></pre></div>
+We are targeting the Ornaments (These christmas balls), getting some sort of object and getting the icon of it. You can change the <code>PediaDirector.Id</code> to the object that you want to have the image</p>
 <h2 id="third-line">Third Line</h2>
-<pre><code class="language-csharp">LookupRegistry.RegisterVacEntry(Identifiable.Id.CRATE_PARTY_01, new Color32(138, 87, 40, 255), icon);
-</code></pre>
-<p>Here we are assigning some background color and our icon to our crate. </p>
-<pre><code class="language-csharp">LookupRegistry.RegisterVacEntry
-</code></pre>
-<p>This method requires 3 parameters:</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterVacEntry</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">,</span> <span class="k">new</span> <span class="n">Color32</span><span class="p">(</span><span class="m">138</span><span class="p">,</span> <span class="m">87</span><span class="p">,</span> <span class="m">40</span><span class="p">,</span> <span class="m">255</span><span class="p">),</span> <span class="n">icon</span><span class="p">);</span>
+</code></pre></div>
+Here we are assigning some background color and our icon to our crate. </p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterVacEntry</span>
+</code></pre></div>
+This method requires 3 parameters:</p>
 <ul>
 <li>The Identifiable.Id of the object that we want to give the colour and icon</li>
 <li>The Colour that we want to give</li>
@@ -400,15 +402,15 @@ We are getting the GameObject of our Crate.</p>
 </ul>
 <p>We already have the Id and the Icon, but for the colour you will have to use a rgb sequence. You can go to this <a href="https://www.mathsisfun.com/hexadecimal-decimal-colors.html">website</a>; play around with the settings until you found your colour. Then just copy the number at the red (default 47), then green (default 50) and blue (default 159) slide and put them into the parameters of the <code>new Color32()</code>. So it would be <code>new Color32(47, 50, 159, 255)</code> (first red, then green and finally blue: This order has to be correct!). The last parameter, the 255, is needed for the transparency: You don't will need it.</p>
 <h2 id="fourth-line">Fourth Line</h2>
-<pre><code class="language-csharp">SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.CRATE_PARTY_01).GetComponent&lt;Vacuumable&gt;().size = Vacuumable.Size.NORMAL;
-</code></pre>
-<p>Here we are making the crate actually vaccumable. Remember, in the first line we only made it "storagable", so that it can enter the inventory, but if you would run your mod then the crate still will stick on the gun and not enter.</p>
-<pre><code class="language-csharp">SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.CRATE_PARTY_01)
-</code></pre>
-<p>We already saw this on the first line, we are getting the GameObject of our crate.</p>
-<pre><code class="language-csharp">.GetComponent&lt;Vacuumable&gt;().size = Vacuumable.Size.NORMAL;
-</code></pre>
-<p>Now we are getting the "Vacuumable Component" (Think this like a folder), then changing the size property to <code>Vacuumable.Size.NORMAL</code>. We have 3 type of sizes: </p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">).</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Vacuumable</span><span class="p">&gt;().</span><span class="n">size</span> <span class="p">=</span> <span class="n">Vacuumable</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">;</span>
+</code></pre></div>
+Here we are making the crate actually vaccumable. Remember, in the first line we only made it "storagable", so that it can enter the inventory, but if you would run your mod then the crate still will stick on the gun and not enter.</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CRATE_PARTY_01</span><span class="p">)</span>
+</code></pre></div>
+We already saw this on the first line, we are getting the GameObject of our crate.</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Vacuumable</span><span class="p">&gt;().</span><span class="n">size</span> <span class="p">=</span> <span class="n">Vacuumable</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">;</span>
+</code></pre></div>
+Now we are getting the "Vacuumable Component" (Think this like a folder), then changing the size property to <code>Vacuumable.Size.NORMAL</code>. We have 3 type of sizes: </p>
 <ul>
 <li>NORMAL</li>
 <li>LARGE</li>
@@ -418,15 +420,15 @@ We are getting the GameObject of our Crate.</p>
 <p>Large means that it will stick on the vacuum gun (like a normal crate)</p>
 <p>Giant means that it can't be collected at all, like a gordo.</p>
 <h2 id="fifthlast-line">Fifth/Last Line</h2>
-<pre><code class="language-csharp">TranslationPatcher.AddActorTranslation(&quot;l.crate_party_01&quot;, &quot;Party Crate&quot;);
-</code></pre>
-<p>You can leave it, but this will add the little "Party Crate" name in your inventory when you are storing a party crate. We are doing this because crates aren't vacuumable, so there dosen't exist any name that should show up when you have one crate in your inventory. So we have to add one ourself!</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">TranslationPatcher</span><span class="p">.</span><span class="n">AddActorTranslation</span><span class="p">(</span><span class="s">&quot;l.crate_party_01&quot;</span><span class="p">,</span> <span class="s">&quot;Party Crate&quot;</span><span class="p">);</span>
+</code></pre></div>
+You can leave it, but this will add the little "Party Crate" name in your inventory when you are storing a party crate. We are doing this because crates aren't vacuumable, so there dosen't exist any name that should show up when you have one crate in your inventory. So we have to add one ourself!</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>This is a long tutorial, but only because I tried to explain everything in details. This is really confusing at start, but you will get the point. Anyways, the next tutorial part is to add custom slimes (warning, it's a really long part), so enjoy your new crate!</p>
 <h1 id="ps">P.S.</h1>
 <p><strong>But FrostDracony, where can I find a party crate? I don't want to search the entire map for one!</strong>
 Ok, keep calm: Just spawn one!
-On Windwos, you can press <code>Crtl + Tab</code> to access the command bar.
+On Windwos, you can press <span class="keys"><kbd class="key-control">Ctrl</kbd></span> + <span class="keys"><kbd class="key-tab">Tab</kbd></span> to access the command bar.
 Type in <code>spawn  CRATE_PARTY_01</code> and a party crate should spawn where you were looking at! (If it doesn't spawn, then it probably spawned below the map.. Just find a flat place like the ranch and retry the command)</p>
 <h1 id="return-to-the-main-place"><a href="/Slime_Rancher/SRML/SRML/">Return to the main place</a></h1>
                 
@@ -437,7 +439,7 @@ Type in <code>spawn  CRATE_PARTY_01</code> and a party crate should spawn where 
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="None",this.page.identifier="None"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//<shortname>.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/modifying_crates/",this.page.identifier="Slime_Rancher/SRML/modifying_crates/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-iom.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>

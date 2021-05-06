@@ -13,6 +13,8 @@
         <meta name="author" content="FrostDracony">
       
       
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/custom_slimes_definition/">
+      
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
     
@@ -441,32 +443,35 @@
                 
                 
                 <h1 id="slime-definition">Slime Definition</h1>
-<p><strong>&gt; Let's start with the slime definition. It's mainly just defining a lot of stuff that the slime needs to function, like its diet, its id, and some other variables.</strong></p>
-<p><strong>&gt; <a href="https://github.com/Lionmeow">Lionmeow</a></strong></p>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>Let's start with the slime definition. It's mainly just defining a lot of stuff that the slime needs to function, like its diet, its id, and some other variables.
+<a href="https://github.com/Lionmeow">Lionmeow</a></p>
+</div>
 <p>Well, let's start with it!</p>
 <h2 id="code-example">Code example</h2>
-<pre><code class="language-csharp">SlimeDefinition pinkSlimeDefinition = SRSingleton&lt;GameContext&gt;.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.PINK_SLIME);
-SlimeDefinition slimeDefinition = (SlimeDefinition)PrefabUtils.DeepCopyObject(pinkSlimeDefinition);
-slimeDefinition.AppearancesDefault = new SlimeAppearance[1];
-slimeDefinition.Diet.Produces = new Identifiable.Id[1]
-{
-    Id.SLIME_PLORT
-};
-slimeDefinition.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[1]
-{
-    SlimeEat.FoodGroup.VEGGIES
-};
-slimeDefinition.Diet.AdditionalFoods = new Identifiable.Id[0];
-slimeDefinition.Diet.Favorites = new Identifiable.Id[1]
-{
-    Identifiable.Id.CARROT_VEGGIE
-};
-slimeDefinition.Diet.EatMap?.Clear();
-slimeDefinition.CanLargofy = false;
-slimeDefinition.FavoriteToys = new Identifiable.Id[0];
-slimeDefinition.Name = &quot;Slime Slime&quot;;
-slimeDefinition.IdentifiableId = Id.SLIME_SLIME;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">SlimeDefinition</span> <span class="n">pinkSlimeDefinition</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">SlimeDefinitions</span><span class="p">.</span><span class="n">GetSlimeByIdentifiableId</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PINK_SLIME</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">SlimeDefinition</span> <span class="n">slimeDefinition</span> <span class="p">=</span> <span class="p">(</span><span class="n">SlimeDefinition</span><span class="p">)</span><span class="n">PrefabUtils</span><span class="p">.</span><span class="n">DeepCopyObject</span><span class="p">(</span><span class="n">pinkSlimeDefinition</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">AppearancesDefault</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeAppearance</span><span class="p">[</span><span class="m">1</span><span class="p">];</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Produces</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">Id</span><span class="p">.</span><span class="n">SLIME_PLORT</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="p">};</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">MajorFoodGroups</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">.</span><span class="n">VEGGIES</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">};</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">AdditionalFoods</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Favorites</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="14 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_VEGGIE</span>
+<span class="linenos" data-linenos="16 "></span><span class="p">};</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span><span class="p">?.</span><span class="n">Clear</span><span class="p">();</span>
+<span class="linenos" data-linenos="18 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">CanLargofy</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="19 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">FavoriteToys</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+<span class="linenos" data-linenos="20 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Slime Slime&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="21 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">IdentifiableId</span> <span class="p">=</span> <span class="n">Id</span><span class="p">.</span><span class="n">SLIME_SLIME</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="breakdown">Breakdown</h2>
 <p><strong>&gt; this code starts with just getting the pink slime's definition, we'll need this a few times. the first time we'll need this is directly after, where we're cloning it to be the definition of our first slime. then we just go through, we set appearancesdefault to a new list, this will be important later. the diet has a few components, what the slime produces, the foodgroups that it eats, the additional foods it can eat outside of the foodgroup, and its favorite foods. we also clear the eatmap because... we do. I set CanLargoify to false because I'm not making largos at the moment. favorite toys is obvious, just the favorite toys. the name of the slime, and finally its identifiable.id. like I said, this is mostly just defining stuff.</strong></p>
 <p><strong>&gt; <a href="https://github.com/Lionmeow">Lionmeow</a></strong></p>
@@ -484,43 +489,43 @@ slimeDefinition.IdentifiableId = Id.SLIME_SLIME;
 <p><code>slimeDefinition.AppearancesDefault = new SlimeAppearance[1];</code></p>
 <p>Creating a new <code>SlimeAppearance</code> with the max lenght of 1 (The little <code>[1]</code> at the end indicates it us).</p>
 <h3 id="fourth-line">Fourth Line</h3>
-<pre><code class="language-csharp">slimeDefinition.Diet.Produces = new Identifiable.Id[1]
-{
-    Identifiable.Id.GOLD_PLORT
-};
-</code></pre>
-<p>Making the slime produce gold plorts when he eats something (you may change this later to all kind of plorts that you want, even custom plorts)</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Produces</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GOLD_PLORT</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">};</span>
+</code></pre></div>
+Making the slime produce gold plorts when he eats something (you may change this later to all kind of plorts that you want, even custom plorts)</p>
 <h3 id="fifth-line">Fifth Line</h3>
-<pre><code class="language-csharp">slimeDefinition.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[1]
-{
-    SlimeEat.FoodGroup.VEGGIES
-};
-</code></pre>
-<p>The FoodGroup that our slime can eat, there exists 5 FoodGroups (that the game code has):</p>
-<pre><code class="language-csharp">enum FoodGroup
-{
-    FRUIT = 0,
-    VEGGIES = 1,
-    MEAT = 2,
-    NONTARRGOLD_SLIMES = 3,
-    PLORTS = 4,
-    GINGER = 5
-}
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">MajorFoodGroups</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">SlimeEat</span><span class="p">.</span><span class="n">FoodGroup</span><span class="p">.</span><span class="n">VEGGIES</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">};</span>
+</code></pre></div>
+The FoodGroup that our slime can eat, there exists 5 FoodGroups (that the game code has):
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">enum</span> <span class="n">FoodGroup</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">FRUIT</span> <span class="p">=</span> <span class="m">0</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">VEGGIES</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">MEAT</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">NONTARRGOLD_SLIMES</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="n">PLORTS</span> <span class="p">=</span> <span class="m">4</span><span class="p">,</span>
+<span class="linenos" data-linenos="8 "></span>    <span class="n">GINGER</span> <span class="p">=</span> <span class="m">5</span>
+<span class="linenos" data-linenos="9 "></span><span class="p">}</span>
+</code></pre></div></p>
 <h3 id="sixth-line">Sixth Line</h3>
 <p><code>slimeDefinition.Diet.AdditionalFoods = new Identifiable.Id[0];</code>
-Adding additional food. Let's say your slime only eats fruit, but he eats, as exception, an ocaoca (wich is a veggie), then you would write there:</p>
-<pre><code class="language-csharp">slimeDefinition.Diet.AdditionalFoods = new Identifiable.Id[1]{
-    Identifiable.Id.OCAOCA_VEGGIE
-}
-</code></pre>
+Adding additional food. Let's say your slime only eats fruit, but he eats, as exception, an ocaoca (wich is a veggie), then you would write there:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">AdditionalFoods</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]{</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">OCAOCA_VEGGIE</span>
+<span class="linenos" data-linenos="3 "></span><span class="p">}</span>
+</code></pre></div></p>
 <h3 id="seventh-line">Seventh Line</h3>
-<pre><code class="language-csharp">slimeDefinition.Diet.Favorites = new Identifiable.Id[1]
-{
-    Identifiable.Id.CARROT_VEGGIE
-};
-</code></pre>
-<p>The slime favorite food (you may be able to change it to all other food, remember that it depends of the fifth line, if you write there <code>SlimeEat.FoodGroup.FRUIT</code> instead of <code>SlimeEat.FoodGroup.VEGGIES</code>, then you have to write a fruit instead of a veggie)</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">Favorites</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_VEGGIE</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">};</span>
+</code></pre></div>
+The slime favorite food (you may be able to change it to all other food, remember that it depends of the fifth line, if you write there <code>SlimeEat.FoodGroup.FRUIT</code> instead of <code>SlimeEat.FoodGroup.VEGGIES</code>, then you have to write a fruit instead of a veggie)</p>
 <h3 id="eighth-line">Eighth Line</h3>
 <p><code>slimeDefinition.Diet.EatMap?.Clear();</code></p>
 <p>No informations found</p>
@@ -529,12 +534,12 @@ Adding additional food. Let's say your slime only eats fruit, but he eats, as ex
 <p>Avoid the slime to Largofy (at this moment there's no found way to largofy slimes, don't set this to true)</p>
 <h3 id="tenth-line">Tenth Line</h3>
 <p><code>slimeDefinition.FavoriteToys = new Identifiable.Id[0];</code></p>
-<p>The favorite toy of your slime, for example:</p>
-<pre><code class="language-csharp">slimeDefinition.FavoriteToys = new Identifiable.Id[1]
-{
-    Identifiable.Id.BEACH_BALL_TOY
-};
-</code></pre>
+<p>The favorite toy of your slime, for example:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">slimeDefinition</span><span class="p">.</span><span class="n">FavoriteToys</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">BEACH_BALL_TOY</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">};</span>
+</code></pre></div></p>
 <h3 id="eleventh-line">Eleventh Line</h3>
 <p><code>slimeDefinition.Name = "Slime Slime";</code></p>
 <p>Setting the name of your slime</p>
@@ -552,7 +557,7 @@ Adding additional food. Let's say your slime only eats fruit, but he eats, as ex
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="None",this.page.identifier="None"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//<shortname>.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/custom_slimes_definition/",this.page.identifier="Slime_Rancher/SRML/CustomSlime/custom_slimes_definition/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-iom.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>

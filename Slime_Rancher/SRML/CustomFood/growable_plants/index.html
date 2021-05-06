@@ -13,6 +13,8 @@
         <meta name="author" content="FrostDracony">
       
       
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomFood/growable_plants/">
+      
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
     
@@ -328,7 +330,10 @@
                   </a>
                 
                 
-                <p><strong>&gt;Thanks a lot to <a href="https://github.com/MegaPiggy">MegaPiggy</a> for his huge help</strong></p>
+                <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Thanks a lot to <a href="https://github.com/MegaPiggy">MegaPiggy</a> for his huge help</p>
+</div>
 <h1 id="requirements">Requirements</h1>
 <ul>
 <li>The <a href="/Slime_Rancher/SRML/CustomFood/getting_started/">getting started</a> tutorial about slime rancher foods</li>
@@ -339,136 +344,136 @@
 <p>And it's time to read what we have to do and how we can do it. For easier tutorials, from now on I will explain every line as comment on the right
 What we are doing here can be applied to every other types of fruits, but for simplicity we will make 2 things plantable: GoldenGingers and Kookadobas, the one is a veggie and the other a fruit, let's see how to plant veggies (GoldenGinger):</p>
 <h1 id="veggies">Veggies</h1>
-<pre><code class="language-csharp">GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH)); //The carrot plant when you plant it, that's what we are going to modify
-Prefab.name = &quot;patchGardenGinger&quot;; //&quot;give it an name&quot;
-SpawnResource spawn = Prefab.GetComponent&lt;SpawnResource&gt;();
-spawn.id = SpawnResource.Id.GINGER_PATCH;//The SpawnResource.Id
-spawn.ObjectsToSpawn = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefabs(Identifiable.Id.PARSNIP_VEGGIE); //What it will spawn
-spawn.BonusObjectsToSpawn = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefabs(Identifiable.Id.GINGER_VEGGIE); //What it will spawn with a rare chance, here our GoldenGinger, we're avoiding getting OP items in a too quick way, so many veggies will be Parsnip and if you're lucky some will be a GoldenGinger
-spawn.MaxObjectsSpawned = 20;//How many can spawn, the max
-spawn.MinObjectsSpawned = 15;//how many can spawn, the min
-spawn.MinNutrientObjectsSpawned = spawn.MaxObjectsSpawned; //???
-spawn.MinSpawnIntervalGameHours = 18; //After how many minutes some veggies will start spawning, the min (that means that after 18 minutes the first veggies will be fully grown up and ready to be harvested)
-spawn.MaxSpawnIntervalGameHours = 24; //After how many minutes some veggies will start spawning, the max (after 24 minutes all veggies will be ready, it's the maximum of time)
-spawn.BonusChance = 0.1f; //The chance of getting the rare veggie
-spawn.minBonusSelections = 2;//How many rare veggies can min spawn if you're lucky
-
-//Parsnip and Ginger Meshes and Materials are something you'll have to take from their identifiable prefab
-foreach (GameObject sprout in Prefab.FindChildren(&quot;Sprout&quot;)) //For every sprout gameobject
-{
-    GameObject ParsnipGameObject = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.PARSNIP_VEGGIE).FindChildWithPartialName(&quot;model_&quot;, false);
-    sprout.GetComponent&lt;MeshFilter&gt;().sharedMesh = ParsnipGameObject.GetComponent&lt;MeshFilter&gt;().sharedMesh;; //Change the mesh
-    sprout.GetComponent&lt;MeshRenderer&gt;().sharedMaterial = ParsnipGameObject.GetComponent&lt;MeshRenderer&gt;().sharedMaterial;; //Change the material
-}
-foreach (Joint joint in spawn.SpawnJoints) //Same things, but now with the spawn joints, basically the actual veggie you will see grow
-{
-    GameObject GingerGameObject = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.GINGER_VEGGIE).FindChildWithPartialName(&quot;model_&quot;, false);
-    joint.gameObject.GetComponent&lt;MeshFilter&gt;().sharedMesh = GingerGameObject.GetComponent&lt;MeshFilter&gt;().sharedMesh;; //Change the mesh
-    joint.gameObject.GetComponent&lt;MeshRenderer&gt;().sharedMaterial = GingerGameObject.GetComponent&lt;MeshRenderer&gt;().sharedMaterial;; //Change the material
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_PATCH</span><span class="p">));</span> <span class="c1">//The carrot plant when you plant it, that&#39;s what we are going to modify</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">Prefab</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenGinger&quot;</span><span class="p">;</span> <span class="c1">//&quot;give it an name&quot;</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">SpawnResource</span> <span class="n">spawn</span> <span class="p">=</span> <span class="n">Prefab</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SpawnResource</span><span class="p">&gt;();</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_PATCH</span><span class="p">;</span><span class="c1">//The SpawnResource.Id</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">ObjectsToSpawn</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefabs</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PARSNIP_VEGGIE</span><span class="p">);</span> <span class="c1">//What it will spawn</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">BonusObjectsToSpawn</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefabs</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_VEGGIE</span><span class="p">);</span> <span class="c1">//What it will spawn with a rare chance, here our GoldenGinger, we&#39;re avoiding getting OP items in a too quick way, so many veggies will be Parsnip and if you&#39;re lucky some will be a GoldenGinger</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span><span class="c1">//How many can spawn, the max</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">15</span><span class="p">;</span><span class="c1">//how many can spawn, the min</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinNutrientObjectsSpawned</span> <span class="p">=</span> <span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span><span class="p">;</span> <span class="c1">//???</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinSpawnIntervalGameHours</span> <span class="p">=</span> <span class="m">18</span><span class="p">;</span> <span class="c1">//After how many minutes some veggies will start spawning, the min (that means that after 18 minutes the first veggies will be fully grown up and ready to be harvested)</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxSpawnIntervalGameHours</span> <span class="p">=</span> <span class="m">24</span><span class="p">;</span> <span class="c1">//After how many minutes some veggies will start spawning, the max (after 24 minutes all veggies will be ready, it&#39;s the maximum of time)</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">BonusChance</span> <span class="p">=</span> <span class="m">0.1f</span><span class="p">;</span> <span class="c1">//The chance of getting the rare veggie</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span><span class="c1">//How many rare veggies can min spawn if you&#39;re lucky</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="c1">//Parsnip and Ginger Meshes and Materials are something you&#39;ll have to take from their identifiable prefab</span>
+<span class="linenos" data-linenos="16 "></span><span class="k">foreach</span> <span class="p">(</span><span class="n">GameObject</span> <span class="n">sprout</span> <span class="k">in</span> <span class="n">Prefab</span><span class="p">.</span><span class="n">FindChildren</span><span class="p">(</span><span class="s">&quot;Sprout&quot;</span><span class="p">))</span> <span class="c1">//For every sprout gameobject</span>
+<span class="linenos" data-linenos="17 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">GameObject</span> <span class="n">ParsnipGameObject</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PARSNIP_VEGGIE</span><span class="p">).</span><span class="n">FindChildWithPartialName</span><span class="p">(</span><span class="s">&quot;model_&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">sprout</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span> <span class="p">=</span> <span class="n">ParsnipGameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;;</span> <span class="c1">//Change the mesh</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">sprout</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span> <span class="p">=</span> <span class="n">ParsnipGameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span><span class="p">;;</span> <span class="c1">//Change the material</span>
+<span class="linenos" data-linenos="21 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span><span class="k">foreach</span> <span class="p">(</span><span class="n">Joint</span> <span class="n">joint</span> <span class="k">in</span> <span class="n">spawn</span><span class="p">.</span><span class="n">SpawnJoints</span><span class="p">)</span> <span class="c1">//Same things, but now with the spawn joints, basically the actual veggie you will see grow</span>
+<span class="linenos" data-linenos="23 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">GameObject</span> <span class="n">GingerGameObject</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_VEGGIE</span><span class="p">).</span><span class="n">FindChildWithPartialName</span><span class="p">(</span><span class="s">&quot;model_&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">joint</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span> <span class="p">=</span> <span class="n">GingerGameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;;</span> <span class="c1">//Change the mesh</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">joint</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span> <span class="p">=</span> <span class="n">GingerGameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span><span class="p">;;</span> <span class="c1">//Change the material</span>
+<span class="linenos" data-linenos="27 "></span><span class="p">}</span>
+</code></pre></div>
 <p>Note how there exists an deluxe version (when you have the deluxe upgrade from Ogden), the ids/enums are the same only that you add an <code>_DLX</code>. For example, in the line <code>PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH))</code>, instead of <code>CARROT_PATCH</code> you can write <code>CARROT_PATCH_DLX</code></p>
 <p>Let's see how to do that!</p>
 <h2 id="deluxe">Deluxe</h2>
-<p>So, for the deluxe version, you have to replace those lines:</p>
-<pre><code class="language-csharp">GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH));
-Prefab.name = &quot;patchGardenGinger&quot;;
-spawn.id = SpawnResource.Id.GINGER_PATCH;
-spawn.MaxObjectsSpawned = 20;
-spawn.MinObjectsSpawned = 15;
-spawn.minBonusSelections = 2;
-</code></pre>
-<p>with those lines:</p>
-<pre><code class="language-csharp">GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH_DLX));
-Prefab.name = &quot;patchGardenGingerDlx&quot;;
-spawn.id = SpawnResource.Id.GINGER_PATCH_DLX;
-spawn.MaxObjectsSpawned = 30;
-spawn.MinObjectsSpawned = 23;
-spawn.minBonusSelections = 4;
-</code></pre>
-<p>See easy to do!</p>
+<p>So, for the deluxe version, you have to replace those lines:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_PATCH</span><span class="p">));</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Prefab</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenGinger&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_PATCH</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">15</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</code></pre></div>
+with those lines:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">CARROT_PATCH_DLX</span><span class="p">));</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Prefab</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenGingerDlx&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_PATCH_DLX</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">23</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+</code></pre></div>
+See easy to do!</p>
 <h1 id="fruit">Fruit</h1>
-<p>Now it's time to see how to make things grow on trees, the Kookadoba part:</p>
-<pre><code class="language-csharp">GameObject gameObject = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.LEMON_TREE));
-gameObject.transform.position -= new Vector3(0f, 15.5f, 0f);
-gameObject.name = &quot;patchGardenKookadoba&quot;;
-SpawnResource component = gameObject.GetComponent&lt;SpawnResource&gt;();
-component.id = CustomEnum; //An custom SpawnResource.Id for your Kookadoba,read the tutorial about Enums (note, SpawnResource.Id, NOT Identifiable.Id)
-component.ObjectsToSpawn = new GameObject[]
-{
-    SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.KOOKADOBA_FRUIT)
-};
-component.BonusObjectsToSpawn = new GameObject[]
-{
-    SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.KOOKADOBA_FRUIT)
-};
-component.MaxObjectsSpawned = 20f;
-component.MinObjectsSpawned = 15f;
-component.MinNutrientObjectsSpawned = component.MaxObjectsSpawned;
-component.MinSpawnIntervalGameHours = 18f;
-component.MaxSpawnIntervalGameHours = 24f;
-component.BonusChance = 0.1f;
-component.minBonusSelections = 2;
-foreach (GameObject gameObject3 in gameObject.FindChildren(&quot;Sprout&quot;, false))
-{
-    GameObject gameObject4 = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.KOOKADOBA_FRUIT).FindChildWithPartialName(&quot;model_&quot;, false);
-    gameObject3.GetComponent&lt;MeshFilter&gt;().sharedMesh = gameObject4.GetComponent&lt;MeshFilter&gt;().sharedMesh;
-    gameObject3.GetComponent&lt;MeshRenderer&gt;().sharedMaterial = gameObject4.GetComponent&lt;MeshRenderer&gt;().sharedMaterial;
-}
-foreach (Joint joint in component.SpawnJoints)
-{
-    GameObject gameObject5 = SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetPrefab(Identifiable.Id.KOOKADOBA_FRUIT).FindChildWithPartialName(&quot;model_&quot;, false);
-    joint.gameObject.GetComponent&lt;MeshFilter&gt;().sharedMesh = gameObject5.GetComponent&lt;MeshFilter&gt;().sharedMesh;
-    joint.gameObject.GetComponent&lt;MeshRenderer&gt;().sharedMaterial = gameObject5.GetComponent&lt;MeshRenderer&gt;().sharedMaterial;
-}
-</code></pre>
-<p>As you can see:</p>
-<pre><code class="language-csharp">GameObject gameObject = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.LEMON_TREE));
-</code></pre>
-<p>We are using the PhaseLemon tree to make our kookadoba grow on. You can use whatever tree is inside the game</p>
+<p>Now it's time to see how to make things grow on trees, the Kookadoba part:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">GameObject</span> <span class="n">gameObject</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">LEMON_TREE</span><span class="p">));</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">-=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">15.5f</span><span class="p">,</span> <span class="m">0f</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">gameObject</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenKookadoba&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">SpawnResource</span> <span class="n">component</span> <span class="p">=</span> <span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">SpawnResource</span><span class="p">&gt;();</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">component</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">CustomEnum</span><span class="p">;</span> <span class="c1">//An custom SpawnResource.Id for your Kookadoba,read the tutorial about Enums (note, SpawnResource.Id, NOT Identifiable.Id)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">component</span><span class="p">.</span><span class="n">ObjectsToSpawn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GameObject</span><span class="p">[]</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">KOOKADOBA_FRUIT</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="p">};</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">component</span><span class="p">.</span><span class="n">BonusObjectsToSpawn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GameObject</span><span class="p">[]</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">KOOKADOBA_FRUIT</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span><span class="p">};</span>
+<span class="linenos" data-linenos="14 "></span><span class="n">component</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">20f</span><span class="p">;</span>
+<span class="linenos" data-linenos="15 "></span><span class="n">component</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">15f</span><span class="p">;</span>
+<span class="linenos" data-linenos="16 "></span><span class="n">component</span><span class="p">.</span><span class="n">MinNutrientObjectsSpawned</span> <span class="p">=</span> <span class="n">component</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span><span class="p">;</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">component</span><span class="p">.</span><span class="n">MinSpawnIntervalGameHours</span> <span class="p">=</span> <span class="m">18f</span><span class="p">;</span>
+<span class="linenos" data-linenos="18 "></span><span class="n">component</span><span class="p">.</span><span class="n">MaxSpawnIntervalGameHours</span> <span class="p">=</span> <span class="m">24f</span><span class="p">;</span>
+<span class="linenos" data-linenos="19 "></span><span class="n">component</span><span class="p">.</span><span class="n">BonusChance</span> <span class="p">=</span> <span class="m">0.1f</span><span class="p">;</span>
+<span class="linenos" data-linenos="20 "></span><span class="n">component</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+<span class="linenos" data-linenos="21 "></span><span class="k">foreach</span> <span class="p">(</span><span class="n">GameObject</span> <span class="n">gameObject3</span> <span class="k">in</span> <span class="n">gameObject</span><span class="p">.</span><span class="n">FindChildren</span><span class="p">(</span><span class="s">&quot;Sprout&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">))</span>
+<span class="linenos" data-linenos="22 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">GameObject</span> <span class="n">gameObject4</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">KOOKADOBA_FRUIT</span><span class="p">).</span><span class="n">FindChildWithPartialName</span><span class="p">(</span><span class="s">&quot;model_&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">gameObject3</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span> <span class="p">=</span> <span class="n">gameObject4</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">gameObject3</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span> <span class="p">=</span> <span class="n">gameObject4</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span><span class="p">;</span>
+<span class="linenos" data-linenos="26 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="27 "></span><span class="k">foreach</span> <span class="p">(</span><span class="n">Joint</span> <span class="n">joint</span> <span class="k">in</span> <span class="n">component</span><span class="p">.</span><span class="n">SpawnJoints</span><span class="p">)</span>
+<span class="linenos" data-linenos="28 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="n">GameObject</span> <span class="n">gameObject5</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">KOOKADOBA_FRUIT</span><span class="p">).</span><span class="n">FindChildWithPartialName</span><span class="p">(</span><span class="s">&quot;model_&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="linenos" data-linenos="30 "></span>    <span class="n">joint</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span> <span class="p">=</span> <span class="n">gameObject5</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;</span>
+<span class="linenos" data-linenos="31 "></span>    <span class="n">joint</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span> <span class="p">=</span> <span class="n">gameObject5</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;().</span><span class="n">sharedMaterial</span><span class="p">;</span>
+<span class="linenos" data-linenos="32 "></span><span class="p">}</span>
+</code></pre></div></p>
+<p>As you can see:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GameObject</span> <span class="n">gameObject</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">LEMON_TREE</span><span class="p">));</span>
+</code></pre></div>
+We are using the PhaseLemon tree to make our kookadoba grow on. You can use whatever tree is inside the game</p>
 <p>Else, note how it's nearly identical to the veggie part, except for the sprouts and spawn joints</p>
 <h2 id="deluxe_1">Deluxe</h2>
 <p>And same as for the veggies, here's the deluxe version.
-So, you have to replace those lines:</p>
-<pre><code class="language-csharp">GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.LEMON_TREE));
-Prefab.name = &quot;patchGardenKookadoba&quot;;
-spawn.id = CustomEnum;
-spawn.MaxObjectsSpawned = 30;
-spawn.MinObjectsSpawned = 23;
-spawn.minBonusSelections = 4;
-</code></pre>
-<p>with those lines:</p>
-<pre><code class="language-csharp">GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.LEMON_TREE_DLX));
-Prefab.name = &quot;patchGardenKookadobaDlx&quot;;
-spawn.id = CustomDlxEnum; //An custom SpawnResource.Id, only that you add &quot;_DLX&quot; at the end
-spawn.MaxObjectsSpawned = 30;
-spawn.MinObjectsSpawned = 23;
-spawn.minBonusSelections = 4;
-</code></pre>
+So, you have to replace those lines:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">LEMON_TREE</span><span class="p">));</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Prefab</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenKookadoba&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">CustomEnum</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">23</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+</code></pre></div>
+with those lines:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=</span> <span class="n">PrefabUtils</span><span class="p">.</span><span class="n">CopyPrefab</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetResourcePrefab</span><span class="p">(</span><span class="n">SpawnResource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">LEMON_TREE_DLX</span><span class="p">));</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Prefab</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;patchGardenKookadobaDlx&quot;</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">CustomDlxEnum</span><span class="p">;</span> <span class="c1">//An custom SpawnResource.Id, only that you add &quot;_DLX&quot; at the end</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MaxObjectsSpawned</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">MinObjectsSpawned</span> <span class="p">=</span> <span class="m">23</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">spawn</span><span class="p">.</span><span class="n">minBonusSelections</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+</code></pre></div></p>
 <p>See easy to do, the same like the veggies!</p>
 <h1 id="registering">Registering</h1>
-<p>So, at first you have to register them in the LookupRegistry:</p>
-<pre><code class="language-csharp">LookupRegistry.RegisterSpawnResource(theNormalPrefab);
-LookupRegistry.RegisterSpawnResource(theDeluxePrefab);
-</code></pre>
-<p>So for the Ginger the Prefab is: <code>GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH));</code>
+<p>So, at first you have to register them in the LookupRegistry:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterSpawnResource</span><span class="p">(</span><span class="n">theNormalPrefab</span><span class="p">);</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterSpawnResource</span><span class="p">(</span><span class="n">theDeluxePrefab</span><span class="p">);</span>
+</code></pre></div>
+So for the Ginger the Prefab is: <code>GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.CARROT_PATCH));</code>
 For the Kookadoba it is: <code>GameObject Prefab = PrefabUtils.CopyPrefab(SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetResourcePrefab(SpawnResource.Id.LEMON_TREE));</code></p>
-<p>Now you add them to garden catchers you create a GardenCatcher.PlantSlot:</p>
-<pre><code class="language-csharp">PlantSlotRegistry.RegisterPlantSlot(new GardenCatcher.PlantSlot()
-{
-    id = Identifiable.Id.GINGER_VEGGIE,
-    deluxePlantedPrefab = theDeluxePrefab,
-    plantedPrefab = theNormalPrefab
-});
-</code></pre>
+<p>Now you add them to garden catchers you create a GardenCatcher.PlantSlot:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">PlantSlotRegistry</span><span class="p">.</span><span class="n">RegisterPlantSlot</span><span class="p">(</span><span class="k">new</span> <span class="n">GardenCatcher</span><span class="p">.</span><span class="n">PlantSlot</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">id</span> <span class="p">=</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">GINGER_VEGGIE</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">deluxePlantedPrefab</span> <span class="p">=</span> <span class="n">theDeluxePrefab</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">plantedPrefab</span> <span class="p">=</span> <span class="n">theNormalPrefab</span>
+<span class="linenos" data-linenos="6 "></span><span class="p">});</span>
+</code></pre></div></p>
 <p>Or in the case of Kookadoba:</p>
-<pre><code class="language-csharp">PlantSlotRegistry.RegisterPlantSlot(new GardenCatcher.PlantSlot()
-{
-    id = Identifiable.Id.KOOKADOBA_FRUIT,
-    deluxePlantedPrefab = theDeluxePrefab,
-    plantedPrefab = theNormalPrefab
-});
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">PlantSlotRegistry</span><span class="p">.</span><span class="n">RegisterPlantSlot</span><span class="p">(</span><span class="k">new</span> <span class="n">GardenCatcher</span><span class="p">.</span><span class="n">PlantSlot</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">id</span> <span class="p">=</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">KOOKADOBA_FRUIT</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">deluxePlantedPrefab</span> <span class="p">=</span> <span class="n">theDeluxePrefab</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">plantedPrefab</span> <span class="p">=</span> <span class="n">theNormalPrefab</span>
+<span class="linenos" data-linenos="6 "></span><span class="p">});</span>
+</code></pre></div>
 <p>And you did it! You completed this tutorial! A quick remember: you can't make chickens grow, they work differently to fruits and veggies</p>
 <p>With that, you can continue with the next tutorial!</p>
                 
@@ -479,7 +484,7 @@ For the Kookadoba it is: <code>GameObject Prefab = PrefabUtils.CopyPrefab(SRSing
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="None",this.page.identifier="None"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//<shortname>.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomFood/growable_plants/",this.page.identifier="Slime_Rancher/SRML/CustomFood/growable_plants/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-iom.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>
