@@ -330,7 +330,10 @@
                   </a>
                 
                 
-                <p><strong>&gt;Thanks a lot to <a href="https://github.com/MegaPiggy">MegaPiggy</a> for his huge help</strong></p>
+                <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Thanks a lot to <a href="https://github.com/MegaPiggy">MegaPiggy</a> for his huge help</p>
+</div>
 <h1 id="requirements">Requirements</h1>
 <ul>
 <li><a href="https://unity3d.com/unity/whats-new/2019.4.11">Unity 2019.4.11</a> (this specific version)</li>
@@ -343,11 +346,13 @@
 I really recommand this <a href="https://www.youtube.com/watch?v=Vgvka2_jBJw">video</a> wich helped me a lot (only watch until <strong>7:11</strong>)</p>
 <p>For anyone who can't access youtube, this is my version
 The first step is to download this Unity version.</p>
-<p><strong>&gt; <a href="https://github.com/Lionmeow">Lionmeow</a></strong></p>
-<blockquote>
-<p>After installing Unity, a little setup is next</p>
-<p>you'll need to create a folder named AssetBundles and create a script named AssetBundleCreator:
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#if UNITY_EDITOR</span>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>"From <a href="https://github.com/Lionmeow">Lionmeow</a>"
+After installing Unity, a little setup is next
+you'll need to create a folder named AssetBundles and create a script named AssetBundleCreator:</p>
+</div>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#if UNITY_EDITOR</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 3 "></span><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 4 "></span>
@@ -369,7 +374,6 @@ The first step is to download this Unity version.</p>
 <span class="linenos" data-linenos="20 "></span><span class="cp">#endif</span>
 </code></pre></div>
 You should be able to find your assetbundle at this location: <code>C:YourUnityProjectFolder\Assets\AssetBundles</code></p>
-</blockquote>
 <h1 id="inserting-the-assetbundle-into-visual-studio">Inserting the assetbundle into Visual Studio</h1>
 <p>Then, insert your mesh/image into a folder (call it what you want, it dosen't matters), select a tag name at right-bottom and you now are able to export your mesh. Next, in your main class, add this line of code (remember to import adding it as reference, watch the requirements on how to do that)
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">AssetBundle</span> <span class="n">assetBundle</span> <span class="p">=</span> <span class="n">AssetBundle</span><span class="p">.</span><span class="n">LoadFromStream</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetExecutingAssembly</span><span class="p">().</span><span class="n">GetManifestResourceStream</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Main</span><span class="p">),</span> <span class="s">&quot;NAME OF BUNDLE&quot;</span><span class="p">));</span>
@@ -391,7 +395,7 @@ And you loaded your assetbundle into visualstudio. At all time, if you want to g
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomFood/getting_started/",this.page.identifier="Slime_Rancher/SRML/CustomFood/getting_started/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-iom.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomFood/getting_started/",this.page.identifier="Slime_Rancher/SRML/CustomFood/getting_started/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-io.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>
