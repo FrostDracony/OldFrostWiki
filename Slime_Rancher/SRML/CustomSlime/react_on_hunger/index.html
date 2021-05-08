@@ -1,0 +1,518 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The official website of FrostDracony">
+      
+      
+      
+        <meta name="author" content="FrostDracony">
+      
+      
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/react_on_hunger/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>React on hunger - FrostWiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FrostWiki" class="md-header__button md-logo" aria-label="FrostWiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FrostWiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              React on hunger
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="/" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/FrostDracony/FrostDracony.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FrostWiki" class="md-nav__button md-logo" aria-label="FrostWiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    FrostWiki
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/FrostDracony/FrostDracony.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Slime Rancher
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Slime Rancher" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Slime Rancher
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SRML/" class="md-nav__link">
+        SRML
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/FrostDracony/FrostDracony.github.io/edit/master/docs/Slime_Rancher/SRML/CustomSlime/react_on_hunger.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Thanks to <a href="https://github.com/MegaPiggy">MegaPiggy</a></p>
+</div>
+<h1 id="getting-started">Getting started</h1>
+<p>I assume that you already are familiar with how and where you place classes, how functions works of C#, I mean all that basic stuff.
+There's not really too much to say here, that's a component that you attach to a slime.</p>
+<p>All the references we will need:</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">using</span> <span class="nn">DG.Tweening</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">using</span> <span class="nn">MonomiPark.SlimeRancher.Regions</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="k">using</span> <span class="nn">System.Collections</span><span class="p">;</span>
+</code></pre></div>
+<p>Let's start with our component!</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">class</span> <span class="nc">WhenAgitated</span> <span class="p">:</span> <span class="n">SlimeSubbehaviour</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">base</span><span class="p">.</span><span class="n">Awake</span><span class="p">();</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Action</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="c1">//Everything that you want</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">public</span> <span class="k">override</span> <span class="kt">float</span> <span class="nf">Relevancy</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isGrounded</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">emotions</span><span class="p">.</span><span class="n">GetCurr</span><span class="p">(</span><span class="n">SlimeEmotions</span><span class="p">.</span><span class="n">Emotion</span><span class="p">.</span><span class="n">AGITATION</span><span class="p">)</span> <span class="p">&gt;=</span> <span class="m">0.5f</span><span class="p">)</span> <span class="c1">//When the slime starts to get agitated</span>
+<span class="linenos" data-linenos="13 "></span>            <span class="k">return</span> <span class="m">1f</span><span class="p">;</span> <span class="c1">//This means do the action. Important; don&#39;t remove it</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="k">return</span> <span class="m">0f</span><span class="p">;</span> <span class="c1">//This means don&#39;t do the actions. Important; don&#39;t remove it</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span>    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Selected</span><span class="p">(){}</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span><span class="p">}</span>
+</code></pre></div>
+Now the question is: what are you going to do with that? Now it starts becoming tricky, because you will have to already know how slime rancher works (not fully, but at least a solid base). Let's say you want your slime to make something every x seconds. Here's an example of what I created (something that makes the slime shoot):</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">IEnumerator</span> <span class="n">currentCoroutine</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">const</span> <span class="kt">float</span> <span class="n">delay</span> <span class="p">=</span> <span class="m">0.125F</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">const</span> <span class="kt">int</span> <span class="n">reloadTime</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kt">int</span> <span class="n">quickShootRemains</span> <span class="p">=</span> <span class="m">120</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kt">bool</span> <span class="n">waitBeforeShoot</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">base</span><span class="p">.</span><span class="n">Awake</span><span class="p">();</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Action</span><span class="p">()</span>
+<span class="linenos" data-linenos="10 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">if</span><span class="p">(</span><span class="n">waitBeforeShoot</span> <span class="p">==</span> <span class="k">false</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="n">waitBeforeShoot</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span>        <span class="k">if</span> <span class="p">(</span><span class="n">currentCoroutine</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="p">{</span>
+<span class="linenos" data-linenos="18 "></span>            <span class="n">StopCoroutine</span><span class="p">(</span><span class="n">currentCoroutine</span><span class="p">);</span>
+<span class="linenos" data-linenos="19 "></span>            <span class="n">currentCoroutine</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="21 "></span>
+<span class="linenos" data-linenos="22 "></span>        <span class="n">Shoot</span><span class="p">();</span>
+<span class="linenos" data-linenos="23 "></span>
+<span class="linenos" data-linenos="24 "></span>        <span class="k">if</span> <span class="p">(</span><span class="n">quickShootRemains</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="25 "></span>            <span class="n">currentCoroutine</span> <span class="p">=</span> <span class="n">Delay</span><span class="p">(</span><span class="n">reloadTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">currentCoroutine</span> <span class="p">==</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">quickShootRemains</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="n">currentCoroutine</span> <span class="p">=</span> <span class="n">Delay</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
+<span class="linenos" data-linenos="31 "></span>        <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">currentCoroutine</span><span class="p">);</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="34 "></span>
+<span class="linenos" data-linenos="35 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="36 "></span>
+<span class="linenos" data-linenos="37 "></span><span class="k">public</span> <span class="n">IEnumerator</span> <span class="nf">Delay</span><span class="p">(</span><span class="kt">float</span> <span class="n">timeToWait</span><span class="p">)</span>
+<span class="linenos" data-linenos="38 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="39 "></span>    <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="nf">WaitForSeconds</span><span class="p">(</span><span class="n">timeToWait</span><span class="p">);</span>
+<span class="linenos" data-linenos="40 "></span>
+<span class="linenos" data-linenos="41 "></span>    <span class="k">if</span> <span class="p">(</span><span class="n">quickShootRemains</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="43 "></span>        <span class="n">quickShootRemains</span> <span class="p">=</span> <span class="m">120</span><span class="p">;</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="45 "></span>
+<span class="linenos" data-linenos="46 "></span>    <span class="n">waitBeforeShoot</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="47 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="48 "></span>
+<span class="linenos" data-linenos="49 "></span><span class="k">public</span> <span class="k">void</span> <span class="nf">Shoot</span><span class="p">()</span>
+<span class="linenos" data-linenos="50 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="51 "></span>    <span class="k">if</span> <span class="p">(</span><span class="n">quickShootRemains</span> <span class="p">!=</span> <span class="m">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="52 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="53 "></span>        <span class="n">Vector3</span> <span class="n">targetPosition</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">SceneContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">Player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0.5F</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="linenos" data-linenos="54 "></span>        <span class="n">CreateShoot</span><span class="p">(</span><span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">targetPosition</span> <span class="p">-</span> <span class="p">(</span><span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">RegionMember</span><span class="p">&gt;().</span><span class="n">setId</span><span class="p">);</span>
+<span class="linenos" data-linenos="55 "></span>        <span class="n">quickShootRemains</span><span class="p">--;</span>
+<span class="linenos" data-linenos="56 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="57 "></span>
+<span class="linenos" data-linenos="58 "></span><span class="p">}</span>
+</code></pre></div>
+Using this, there will be a delay and after it shooted x shots, it will cooldown for a bit. Perfect!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are asking you "What's the <code>CreateShoot</code> function?!", it's explained below</p>
+</div>
+<p>If you know the basics, you will understand it a bit or maybe not. If you don't know them, you will understand absolutely nothing. Well, that are Unity's coroutines! Good news: we are getting near to more advanced stuff! Bad news: if you still are just copy pasting, then good luck, because from now on you will have to read the tutorials.</p>
+<p>Now, for the sake of these tutorials, I will make a system where your slime will shoot electric shoots. That's only to make so that you start understanding how the whole system works.</p>
+<p>So,, let's say we have a function called <code>CreateShoot</code>, that's this (You should already be able to understand what it does)</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">CreateShoot</span><span class="p">(</span><span class="n">Vector3</span> <span class="n">origin</span><span class="p">,</span> <span class="n">Vector3</span> <span class="n">direction</span><span class="p">,</span> <span class="n">RegionRegistry</span><span class="p">.</span><span class="n">RegionSetId</span> <span class="n">id</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">GameObject</span> <span class="n">Shoot</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">VALLEY_AMMO_1</span><span class="p">);</span> <span class="c1">//SpecialObjects.CreateShockBall();</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">Shoot</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">DamagePlayerOnTouch</span><span class="p">&gt;().</span><span class="n">GetCopyOf</span><span class="p">(</span><span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">LookupDirector</span><span class="p">.</span><span class="n">GetPrefab</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ROCK_SLIME</span><span class="p">).</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">DamagePlayerOnTouch</span><span class="p">&gt;());</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">Shoot</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">DamagePlayerOnTouch</span><span class="p">&gt;().</span><span class="n">damagePerTouch</span> <span class="p">=</span> <span class="m">250</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">WeaponVacuum</span> <span class="n">weaponVacuum</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">WeaponVacuum</span><span class="p">&gt;();</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">GameObject</span> <span class="n">vacOrigin</span> <span class="p">=</span> <span class="n">weaponVacuum</span><span class="p">.</span><span class="n">vacOrigin</span><span class="p">;</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">vp_FPController</span> <span class="n">componentInParent</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">vp_FPController</span><span class="p">&gt;();</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">Ray</span> <span class="n">ray</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Ray</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">direction</span><span class="p">);</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span>    <span class="kt">float</span> <span class="n">num</span> <span class="p">=</span> <span class="n">PhysicsUtil</span><span class="p">.</span><span class="n">RadiusOfObject</span><span class="p">(</span><span class="n">Shoot</span><span class="p">);</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span>    <span class="n">Vector3</span> <span class="n">velocity</span> <span class="p">=</span> <span class="n">ray</span><span class="p">.</span><span class="n">direction</span> <span class="p">*</span> <span class="n">weaponVacuum</span><span class="p">.</span><span class="n">GetSpeed</span><span class="p">(</span><span class="n">weaponVacuum</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">Ammo</span><span class="p">.</span><span class="n">GetSelectedId</span><span class="p">())</span> <span class="p">+</span> <span class="p">(</span><span class="n">componentInParent</span><span class="p">.</span><span class="n">Velocity</span> <span class="p">*</span> <span class="m">400</span><span class="p">);</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">GameObject</span> <span class="n">gameObject</span> <span class="p">=</span> <span class="n">SRBehaviour</span><span class="p">.</span><span class="n">InstantiateActor</span><span class="p">(</span><span class="n">Shoot</span><span class="p">,</span> <span class="n">weaponVacuum</span><span class="p">.</span><span class="n">regionRegistry</span><span class="p">.</span><span class="n">GetCurrentRegionSetId</span><span class="p">(),</span> <span class="n">origin</span><span class="p">,</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">identity</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">LookAt</span><span class="p">(</span><span class="n">weaponVacuum</span><span class="p">.</span><span class="n">transform</span><span class="p">);</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="n">PhysicsUtil</span><span class="p">.</span><span class="n">RestoreFreezeRotationConstraints</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;().</span><span class="n">velocity</span> <span class="p">=</span> <span class="n">velocity</span><span class="p">;</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Vacuumable</span><span class="p">&gt;().</span><span class="n">Launch</span><span class="p">(</span><span class="n">Vacuumable</span><span class="p">.</span><span class="n">LaunchSource</span><span class="p">.</span><span class="n">PLAYER</span><span class="p">);</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Vacuumable</span><span class="p">&gt;().</span><span class="n">size</span> <span class="p">=</span> <span class="n">Vacuumable</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">GIANT</span><span class="p">;</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">DOScale</span><span class="p">(</span><span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">localScale</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">).</span><span class="n">From</span><span class="p">(</span><span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">localScale</span> <span class="p">*</span> <span class="m">0.2f</span><span class="p">,</span> <span class="k">true</span><span class="p">).</span><span class="n">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">Linear</span><span class="p">);</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span><span class="p">}</span>
+</code></pre></div>
+<p>If we try this out, then when the slime gets hungry, it will spamm shooting you, causing the game to crash or heavyly lag. So that's the reason of my version of the component: It makes the slime delays every shoot, making it possible to escape or give it food!</p>
+<p>Hope it makes sense, if not then write it below in the comments (as quest or logged in with a disqus account)</p>
+<p>Hope you get it and that you had fun reading this tutorial! </p>
+                
+              
+              
+                
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/react_on_hunger/",this.page.identifier="Slime_Rancher/SRML/CustomSlime/react_on_hunger/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-io.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright © 2021 FrostDracony, all rights reserved
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>

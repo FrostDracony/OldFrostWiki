@@ -13,14 +13,14 @@
         <meta name="author" content="FrostDracony">
       
       
-        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/getting_started/">
+        <link rel="canonical" href="https://frostdracony.github.io/Slime_Rancher/SRML/CustomItems/gadgets/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
     
     
       
-        <title>Getting started - FrostWiki</title>
+        <title>Gadgets - FrostWiki</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#requirements" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting started
+              Gadgets
             
           </span>
         </div>
@@ -325,62 +325,90 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/FrostDracony/FrostDracony.github.io/edit/master/docs/Slime_Rancher/SRML/CustomSlime/getting_started.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/FrostDracony/FrostDracony.github.io/edit/master/docs/Slime_Rancher/SRML/CustomItems/gadgets.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="getting-started">Getting started</h1>
-<div class="admonition quote">
-<p class="admonition-title">Quote</p>
-<p>Making a slime is split into three parts. making the slime's object, making the slime's definition, and making the slime's appearance.
-This will all be in load or postload. I usually do it in load.</p>
+                <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the informations come from <a href="https://github.com/veesusmikelheir">veesus mikel heir</a>, a huge thanks</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Here's an important warning: if you don't wanna break your save, make sure, if you're removing a custom identifiable.id that's linked to an object, that you delete all instances of that object in your save.</p>
+<p>At the time I wrote the tutorial, nothing got tested. These informations come from the old mod Quicksilver Rancher (it got removed and replaced by a revamped version).So test it on a custom world.</p>
 </div>
-<div class="admonition quote">
-<p class="admonition-title">Quote</p>
-<p><a href="https://github.com/Lionmeow">Lionmeow</a></p>
-</div>
-<h1 id="basic-requirements">Basic Requirements</h1>
+<h1 id="requirements">Requirements</h1>
 <ul>
-<li>You will need be able to create custom Enums (click <a href="/Slime_Rancher/SRML/creating_enums">here</a> to see the tutorial if you missed it)</li>
+<li>Creating <a href="/Slime_Rancher/SRML/creating_enums">custom Enums</a></li>
 </ul>
-<h1 id="planning">Planning</h1>
-<p>What we are going to do is to creating our own slime. It long, and seems like a bunch of no sense, but you will see that we are only defining stuff, nothing more</p>
-<h1 id="theory">Theory</h1>
-<p>In a nutshell, a slime's code is divided into 3 sections:</p>
-<ol>
-<li>The slime's definition (The informations of the slime)</li>
-<li>The slime's object (The "main body" of the slime)</li>
-<li>The slime's appearance (The aspect of the slime)
-Each one of the sections has a role and combined they create a slime</li>
-</ol>
-<h1 id="locating">Locating</h1>
-<p>This will be a "huge" code, you should create another, custom, class for this. What I did was to create a class called <code>Custom_Creator</code> with a function called <code>CreateSlime(Identifiable.Id SlimeId, String SlimeName)</code> (it returns a <code>(SlimeDefinition, GameObject)</code> tuple)</p>
-<h1 id="required-namespaces">Required Namespaces</h1>
-<p>You will need require the <code>UnityEngine</code> and <code>SRML.Utils</code> namespaces, this can be done writing:
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">using</span> <span class="nn">SRML.Utils</span><span class="p">;</span>
-<span class="linenos" data-linenos="2 "></span><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<h1 id="what-and-how-will-this-work">What and how will this work?</h1>
+<p>This tutorial isn't too long, it's just about registering an item to the fabricator (and defining stuff). Note: you will need to create a new <code>Gadget.Id</code> Enum for your gadget.</p>
+<p>Let's start with creating the gadget definition! That is what I would say, but before doing that we will need an custom <code>GadgetModel</code>. So let's make one!
+At first, all the references that we will need in this tutorial:
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">using</span> <span class="nn">MonomiPark.SlimeRancher.DataModel</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="k">using</span> <span class="nn">SRML.SR</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="k">using</span> <span class="nn">SRML.SR.SaveSystem</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
 </code></pre></div></p>
-<h1 id="continue">Continue</h1>
-<p>Now, because this may be really long to put it only in one page, you have 4 pages wich, 3 cover the 3 sections and 1 just explain additional stuff:</p>
-<ol>
-<li>
-<p><a href="/Slime_Rancher/SRML/CustomSlime/custom_slimes_definition/">Slime's Definition</a></p>
-</li>
-<li>
-<p><a href="/Slime_Rancher/SRML/CustomSlime/custom_slimes_object/">Slime's Object</a></p>
-</li>
-<li>
-<p><a href="/Slime_Rancher/SRML/CustomSlime/custom_slimes_appearance/">Slime's Appearance</a></p>
-</li>
-<li>
-<p><a href="/Slime_Rancher/SRML/CustomSlime/final_steps/">The final steps</a></p>
-</li>
-</ol>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">public</span> <span class="k">class</span> <span class="nc">CustomGadgetModel</span> <span class="p">:</span> <span class="n">GadgetModel</span><span class="p">,</span> <span class="n">ISerializableModel</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="k">private</span> <span class="kt">int</span> <span class="n">Version</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos=" 5 "></span>        <span class="k">get</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="p">{</span>
+<span class="linenos" data-linenos=" 7 "></span>            <span class="k">return</span> <span class="m">0</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span>    <span class="k">public</span> <span class="nf">CustomGadgetModel</span><span class="p">(</span><span class="n">Gadget</span><span class="p">.</span><span class="n">Id</span> <span class="n">ident</span><span class="p">,</span> <span class="kt">string</span> <span class="n">siteId</span><span class="p">,</span> <span class="n">Transform</span> <span class="n">transform</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">ident</span><span class="p">,</span> <span class="n">siteId</span><span class="p">,</span> <span class="n">transform</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">public</span> <span class="k">void</span> <span class="nf">LoadData</span><span class="p">(</span><span class="n">BinaryReader</span> <span class="n">reader</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="kt">int</span> <span class="n">num</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">ReadInt32</span><span class="p">();</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">this</span><span class="p">.</span><span class="n">testProperty</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">ReadSingle</span><span class="p">();</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">public</span> <span class="k">void</span> <span class="nf">WriteData</span><span class="p">(</span><span class="n">BinaryWriter</span> <span class="n">writer</span><span class="p">)</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="n">writer</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">Version</span><span class="p">);</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="n">writer</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">testProperty</span><span class="p">);</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span>    <span class="k">public</span> <span class="kt">float</span> <span class="n">testProperty</span><span class="p">;</span>
+<span class="linenos" data-linenos="28 "></span><span class="p">}</span>
+</code></pre></div>
+As you can see, it has 2 functions: <code>LoadData</code> and <code>WriteData</code>. The first is used when the gadget is loaded and the second when you are closing the game. You can make it store custom properties, as you can see with the <code>testProperty</code>. That's if you want the gadget to store properties that you may need later on.</p>
+<p>But that's for another tutorial. Now that we have our <code>CustomGadgetModel</code>class, we can finally register the whole:</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterGadget</span><span class="p">(</span><span class="k">new</span> <span class="n">GadgetDefinition</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">prefab</span> <span class="p">=</span> <span class="n">gameObject</span><span class="p">,</span> <span class="c1">//Just use another, already, existing GameObject of a gadget. Tutorials about custom models ASAP.</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">id</span> <span class="p">=</span> <span class="n">YOUR_GADGET_ID</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">pediaLink</span> <span class="p">=</span> <span class="n">PediaDirector</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">UTILITIES</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">blueprintCost</span> <span class="p">=</span> <span class="m">1000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">buyCountLimit</span> <span class="p">=</span> <span class="m">10</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">craftCosts</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GadgetDefinition</span><span class="p">.</span><span class="n">CraftCost</span><span class="p">[]</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="k">new</span> <span class="n">GadgetDefinition</span><span class="p">.</span><span class="n">CraftCost</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="p">{</span>
+<span class="linenos" data-linenos="12 "></span>            <span class="n">amount</span> <span class="p">=</span> <span class="m">10</span><span class="p">,</span>
+<span class="linenos" data-linenos="13 "></span>            <span class="n">id</span> <span class="p">=</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">PINK_PLORT</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="p">}</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="p">}</span>
+<span class="linenos" data-linenos="16 "></span><span class="p">});</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span><span class="k">new</span> <span class="nf">GadgetTranslation</span><span class="p">(</span><span class="n">YOUR_GADGET_ID</span><span class="p">).</span><span class="n">GetTranslation</span><span class="p">().</span><span class="n">SetNameTranslation</span><span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">).</span><span class="n">SetDescriptionTranslation</span><span class="p">(</span><span class="s">&quot;DESCRIPTION&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="n">SaveRegistry</span><span class="p">.</span><span class="n">RegisterSerializableGadgetModel</span><span class="p">&lt;</span><span class="n">CustomGadgetModel</span><span class="p">&gt;(</span><span class="m">0</span><span class="p">);</span>
+<span class="linenos" data-linenos="21 "></span><span class="n">DataModelRegistry</span><span class="p">.</span><span class="n">RegisterCustomGadgetModel</span><span class="p">(</span><span class="n">YOUR_GADGET_ID</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">CustomGadgetModel</span><span class="p">));</span>
+<span class="linenos" data-linenos="22 "></span><span class="n">GadgetRegistry</span><span class="p">.</span><span class="n">RegisterBlueprintLock</span><span class="p">(</span><span class="n">YOUR_GADGET_ID</span><span class="p">,</span> <span class="p">(</span><span class="n">GadgetRegistry</span><span class="p">.</span><span class="n">BlueprintLockCreateDelegate</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">CreateBasicLock</span><span class="p">(</span><span class="n">YOUR_GADGET_ID</span><span class="p">,</span> <span class="n">Gadget</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">ProgressDirector</span><span class="p">.</span><span class="n">ProgressType</span><span class="p">.</span><span class="n">YOUR_ZONE</span><span class="p">,</span> <span class="m">3f</span><span class="p">)));</span> <span class="c1">//Replace &#39;YOUR_ZONE&#39; with the Zone you want.</span>
+</code></pre></div>
+To change the icon you can set a new <code>Sprite</code> instance to <code>SRSingleton&lt;GameContext&gt;.Instance.LookupDirector.GetGadgetDefinition(YOUR_GADGET_ID).icon</code></p>
+<p>Finally! Time to test it out!</p>
                 
               
               
@@ -389,7 +417,7 @@ Each one of the sections has a role and combined they create a slime</li>
 
   <h2 id="__comments">Comments</h2>
   <div id="disqus_thread"></div>
-  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomSlime/getting_started/",this.page.identifier="Slime_Rancher/SRML/CustomSlime/getting_started/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-io.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
+  <script>var disqus_config=function(){this.page.url="https://frostdracony.github.io/Slime_Rancher/SRML/CustomItems/gadgets/",this.page.identifier="Slime_Rancher/SRML/CustomItems/gadgets/"};window.addEventListener("load",function(){var e=document,i=e.createElement("script");i.src="//https-frostdracony-github-io.disqus.com/embed.js",i.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(i)})</script>
 
               
             </article>

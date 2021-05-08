@@ -139,7 +139,7 @@
             <ul class="md-select__list">
               
                 <li class="md-select__item">
-                  <a href="../../../../<your-site>/en/" hreflang="en" class="md-select__link">
+                  <a href="/" hreflang="en" class="md-select__link">
                     English
                   </a>
                 </li>
@@ -446,6 +446,32 @@ I already told you a bit how I do it, so we only have to make a function from th
 <span class="linenos" data-linenos="8 "></span><span class="n">LookupRegistry</span><span class="p">.</span><span class="n">RegisterIdentifiablePrefab</span><span class="p">(</span><span class="n">Slime_Slime_Object</span><span class="p">);</span>
 <span class="linenos" data-linenos="9 "></span><span class="n">SlimeRegistry</span><span class="p">.</span><span class="n">RegisterSlimeDefinition</span><span class="p">(</span><span class="n">Slime_Slime_Definition</span><span class="p">);</span>
 </code></pre></div></p>
+<h1 id="extra-steps">Extra steps</h1>
+<p>What if you want your slime to eat something that it normaly dosen't? And you have to make so that tarrs eat your slime too!
+To do it, just add this:</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">Slime_Slime_Definition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">SlimeDiet</span><span class="p">.</span><span class="n">EatMapEntry</span><span class="p">&gt;();</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">foreach</span> <span class="p">(</span><span class="n">SlimeDiet</span><span class="p">.</span><span class="n">EatMapEntry</span> <span class="n">eatMapEntry</span> <span class="k">in</span> <span class="n">slimeByIdentifiableId</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">Slime_Slime_Definition</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">SlimeDiet</span><span class="p">.</span><span class="n">EatMapEntry</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="p">{</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="n">eats</span> <span class="p">=</span> <span class="n">ID_TO_BE_EATEN</span><span class="p">,</span> <span class="c1">//The thing to be eaten</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="n">producesId</span> <span class="p">=</span> <span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">NONE</span><span class="p">,</span> <span class="c1">//What it produces</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="n">isFavorite</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="c1">//Is that it&#39;s favorite food?</span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="n">driver</span> <span class="p">=</span> <span class="n">SlimeEmotions</span><span class="p">.</span><span class="n">Emotion</span><span class="p">.</span><span class="n">HUNGER</span> <span class="c1">//When it eats</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="p">});</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">}</span>
+</code></pre></div>
+And for a tarr:</p>
+<p><div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">SlimeDefinition</span> <span class="n">slimeByIdentifiableId</span> <span class="p">=</span> <span class="n">SRSingleton</span><span class="p">&lt;</span><span class="n">GameContext</span><span class="p">&gt;.</span><span class="n">Instance</span><span class="p">.</span><span class="n">SlimeDefinitions</span><span class="p">.</span><span class="n">GetSlimeByIdentifiableId</span><span class="p">(</span><span class="n">Identifiable</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">TARR_SLIME</span><span class="p">);</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">slimeByIdentifiableId</span><span class="p">.</span><span class="n">Diet</span><span class="p">.</span><span class="n">EatMap</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">SlimeDiet</span><span class="p">.</span><span class="n">EatMapEntry</span>
+<span class="linenos" data-linenos="3 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">eats</span> <span class="p">=</span> <span class="n">YOUR_SLIME_ID</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">becomesId</span> <span class="p">=</span> <span class="n">Id</span><span class="p">.</span><span class="n">CALMED_TARR_SLIME</span><span class="p">,</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">driver</span> <span class="p">=</span> <span class="n">SlimeEmotions</span><span class="p">.</span><span class="n">Emotion</span><span class="p">.</span><span class="n">NONE</span><span class="p">,</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="n">extraDrive</span> <span class="p">=</span> <span class="m">999999f</span>
+<span class="linenos" data-linenos="8 "></span><span class="p">});</span>
+</code></pre></div>
+That works for everything, even for normally not eaten things! (Slimes can eat other slimes, or slime science resources)</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>This is a really long tutorial, one of the longest. Now have fun by testing your slime! To spawn it, you use the command bar (crtl + tab). The next tutorial will talking about creating custom food. Time to celebrate!</p>
 <h1 id="return-to-the-main-place"><a href="/Slime_Rancher/SRML/SRML/">Return to the main place</a></h1>
